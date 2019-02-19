@@ -1,0 +1,2 @@
+const mapboxAPIKey = 'pk.eyJ1IjoiY2hpcmFncmFtYW5pIiwiYSI6ImNqc2MzcnVrNDA0bGQ0NXJ5Z21wM2tmanYifQ.ckQFIMn2Mw5dN3y_lDREog';
+
