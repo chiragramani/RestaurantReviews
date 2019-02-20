@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added 
   fetchNeighborhoods();
   fetchCuisines();
-  registerServiceWorker();
 });
 
 /**
@@ -166,6 +165,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('alt',`${restaurant.name} in ${restaurant.neighborhood}`);
   li.append(image);
 
   const name = document.createElement('h1');
@@ -225,5 +225,11 @@ function registerServiceWorker() {
     .catch(function() {
       console.log("SW registration failed");
     });
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    registerServiceWorker();
+  });
 }
 
