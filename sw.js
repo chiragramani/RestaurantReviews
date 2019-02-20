@@ -5,7 +5,6 @@ self.addEventListener("install", function(event) {
     "/",
     "css/styles.css",
     "data/restaurants.json",
-    "img/*",
     "js/*",
     "index.html",
     "restaurant.html"
@@ -23,7 +22,7 @@ self.addEventListener("install", function(event) {
 self.addEventListener("fetch", function(event) {
   event.waitUntil(
     caches.match(event.request).then(response => {
-      if (response) {
+      if (!response || response.status !== 200 || response.type !== "basic") {
         return response;
       }
       fetch(event.request).then(response => {
@@ -36,15 +35,17 @@ self.addEventListener("fetch", function(event) {
   );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener("activate", function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.filter(function(cacheName) {
-          return cacheName != validCacheName;
-        }).map(function(cacheName) {
-          return caches.delete(cacheName);
-        })
+        cacheNames
+          .filter(function(cacheName) {
+            return cacheName != validCacheName;
+          })
+          .map(function(cacheName) {
+            return caches.delete(cacheName);
+          })
       );
     })
   );
