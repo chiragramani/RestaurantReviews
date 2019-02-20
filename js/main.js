@@ -36,6 +36,8 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   neighborhoods.forEach(neighborhood => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
+    option.setAttribute("role", "listitem");
+    option.setAttribute("aria-label", neighborhood);
     option.value = neighborhood;
     select.append(option);
   });
@@ -65,6 +67,8 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
+    option.setAttribute("role", "listitem");
+    option.setAttribute("aria-label", cuisine);
     select.append(option);
   });
 }
